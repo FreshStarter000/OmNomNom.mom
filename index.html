@@ -13,10 +13,10 @@
 <body>
 
     <div id="mainbuttons" class="parent mainbuttons">
-    <a href="/audio-player">Bump sweet tunes!</a>
-    <a href="/choose-your-own-adventure">Read a bedtime story!</a>
-    <a href="/fashion-game">Play some games!</a>
-    <a href="/audio-player">Fourth option!</a>
+    <a href="/under-construction/under-construction.png">Bump sweet tunes!</a>
+    <a href="/under-construction/under-construction.png">Read a bedtime story!</a>
+    <a href="/under-construction/under-construction.png">Play some games!</a>
+    <a href="/under-construction/under-construction.png">Fourth option!</a>
     <button onclick="goToRandomPage()">
     <span id="randomButton">Hello!</span>
     </a>
@@ -50,9 +50,7 @@ document.getElementById('randomButton').innerHTML = buttonOptions
 
 function goToRandomPage() {
   const pages = [
-    '/audio-player',
-    '/choose-your-own-adventure',
-    '/fashion-game',
+    '/under-construction/under-construction.png',
   ];
 
   const randomIndex = Math.floor(Math.random() * pages.length);
@@ -80,12 +78,12 @@ a {
 .header {
     text-align: center;
   background-color: #31263E;
-  padding: 10px;
-  margin: 5px;
+  width: 100%;
+  padding: 0.5%;
 }
 
  .header img {
-  height: 10%;
+  height: 5%;
   object-fit: contain;
  }
 

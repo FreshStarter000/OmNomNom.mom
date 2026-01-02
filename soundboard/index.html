@@ -1,0 +1,156 @@
+<html>
+<head>
+
+<div class="parent header">
+<a href="/">
+  <img src="/omLogo.png">
+</a>
+</div>
+
+</head>
+
+<body>
+
+<div class="rowContainer">
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="b-boy.mp3">
+        <span>Hi.</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="cow-moo.mp3" style="filter:hue-rotate(200deg);">
+        <span>Moo</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="dry-fart.mp3" style="filter:hue-rotate(50deg);">
+        <span>Fart</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="bertram-gay.mp3" style="filter:hue-rotate(150deg);">
+        <span>Gay</span>
+    </div>
+</div>
+<div class="rowContainer">
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="yougetnothing.mp3" style="filter:hue-rotate(275deg);">
+        <span>You lose!</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="rizz-sound-effect.mp3" style="filter:hue-rotate(-30deg);">
+        <span>Rizz</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="faaah.mp3" style="filter:hue-rotate(100deg);">
+        <span>FAAAH</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="incorrect.mp3" style="filter:hue-rotate(20deg);">
+        <span>Loud Incorrect Buzzer</span>
+    </div>
+</div>
+<div class="rowContainer">
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="beep.mp3">
+        <span>Beep</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="prowler.mp3" style="filter:hue-rotate(200deg);">
+        <span>Prowler</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="bad-bone.mp3" style="filter:hue-rotate(50deg);">
+        <span>Bad to the Bone</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="delelele.mp3" style="filter:hue-rotate(150deg);">
+        <span>Bug</span>
+    </div>
+</div>
+<div class="rowContainer">
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="sans.mp3" style="filter:hue-rotate(275deg);">
+        <span>Bad Time</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="error.mp3" style="filter:hue-rotate(-30deg);">
+        <span>Error</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="ahh.mp3" style="filter:hue-rotate(100deg);">
+        <span>ahh</span>
+    </div>
+    <div class="singleButton">
+        <img src="buttonUp.png" class="soundbutton" id="shut-up-smosh.mp3" style="filter:hue-rotate(20deg);">
+        <span>Somsh</span>
+    </div>
+</div>
+
+<audio id="audio">
+<source src="b-boy.mp3" type="audio/mpeg">
+Your browser is lame and doesn't audio players :/
+</audio>
+
+<script>
+
+const audio = document.getElementById('audio');
+const soundbuttons = document.querySelectorAll('.soundbutton');
+soundbuttons.forEach(image => {
+  image.addEventListener('click', function() {
+  const currentSound = this.id;
+  const newSource = currentSound;
+  audio.src = newSource;
+  audio.load;
+  audio.play();
+  image.src = "buttonDown.png"
+  setTimeout(function(){
+  image.src = "buttonUp.png";}, 100);
+  })
+})
+
+</script>
+
+<style>
+
+body {
+    font-family: verdana;
+    background-color: #221E22;
+    color:white;
+    font-size: 100%;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.header {
+    text-align: center;
+  background-color: #31263E;
+  width: 100%;
+  padding: 0.5%;
+}
+
+ .header img {
+  height: 5%;
+  object-fit: contain;
+ }
+
+.singleButton {
+  text-align: center;
+  height: fit-content;
+  padding-left: fill;
+  padding-right:fill;
+  padding-bottom: 10vh;
+}
+
+.rowContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.soundbutton {
+    max-width: 100%;
+}
+
+</style>
+</body>
+</html>
