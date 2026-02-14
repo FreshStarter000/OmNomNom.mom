@@ -84,6 +84,7 @@ class BouncingLogo {
         this.element = document.createElement('p');
         this.element.className = 'bouncing-logo';
         this.element.innerText = text;
+        this.element.style.fontSize = '5vh';
         this.element.onclick = (event) => {
             window.location.href = `/${text}`};
         container.appendChild(this.element);
