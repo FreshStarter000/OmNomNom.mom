@@ -15,8 +15,8 @@
     </a>
   </div>
   <div class="row content">
-    <div class="bouncebox">
-      <p class="bouncer" onclick="goToRandomPage()">Hi</p>
+    <div id="container">
+        <p id="bouncing-text" onclick="goToRandomPage()">DVD</p>
     </div>
   </div>
   <div class="row footer">
@@ -33,7 +33,7 @@
 
 <script>
 
-var array = [
+    var array = [
 "Quoth the Raven \"I love Omnomnom.mom!\"",
 "Do you want a banana?",
 "This button is random!",
@@ -57,39 +57,109 @@ var buttonOptions = array[index];
 
 document.getElementById('randomButton').innerHTML = buttonOptions
 
-function goToRandomPage() {
-  const pages = [
-    '/soundboard',
-    '/gay-test',
-    '/onion',
-    '/pendulum',
-    '/doodle',
-    '/spinningcat',
-    '/dice',
-    '/milk',
-    '/funny',
-    '/gullible',
+const pages = [
+    'soundboard',
+    'gay-test',
+    'onion',
+    'pendulum',
+    'doodle',
+    'spinningcat',
+    'dice',
+    'milk',
+    'funny',
+    'gullible',
   ];
-
   const randomIndex = Math.floor(Math.random() * pages.length);
   const randomPage = pages[randomIndex];
 
-  window.location.href = randomPage;
+function goToRandomPage() {
+  window.location.href = `/${randomPage}`;
 }
 
+const container = document.getElementById('container');
+const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
+
+class BouncingLogo {
+    constructor(text) {
+        this.element = document.createElement('p');
+        this.element.className = 'bouncing-logo';
+        this.element.innerText = text;
+        this.element.onclick = (event) => {
+            window.location.href = `/${text}`};
+        container.appendChild(this.element);
+
+        const containerRect = container.getBoundingClientRect();
+        const logoRect = this.element.getBoundingClientRect();
+
+        const maxX = containerRect.width;
+        const maxY = containerRect.height;
+
+        this.posX = Math.random() + maxX;
+        this.posY = Math.random() + maxY;
+
+        this.velX = (0.1 + Math.random()) * (Math.random() > 0.5 ? 1 : -1);
+        this.velY = (0.1 + Math.random()) * (Math.random() > 0.5 ? 1 : -1);
+
+        this.changeColor();
+    }
+
+    update() {
+        const containerRect = container.getBoundingClientRect();
+        const logoRect = this.element.getBoundingClientRect();
+
+        this.posX += this.velX;
+        this.posY += this.velY;
+
+        if (this.posX <= 0 || this.posX + logoRect.width >= containerRect.width) {
+            this.velX *= -1;
+            this.posX = Math.max(0, Math.min(this.posX, containerRect.width - logoRect.width));
+            this.changeColor();
+        }
+
+        if (this.posY <= 0 || this.posY + logoRect.height >= containerRect.height) {
+            this.velY *= -1;
+            this.posY = Math.max(0, Math.min(this.posY, containerRect.height - logoRect.height));
+            this.changeColor();
+        }
+
+        this.element.style.left = this.posX + 'px';
+        this.element.style.top = this.posY + 'px';
+    }
+
+    changeColor() {
+        const newColor = colors[Math.floor(Math.random() * colors.length)];
+        this.element.style.color = newColor;
+    }
+}
+
+function getRandomSubarray(arr, size) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, size);
+}
+
+const selectedLogos = getRandomSubarray(pages, 5);
+const activeLogos = selectedLogos.map(text => new BouncingLogo(text));
+
+function animate() {
+    activeLogos.forEach(logo => logo.update());
+    requestAnimationFrame(animate);
+}
+
+animate();
 </script>
 
 <style>
+        body {
+            margin: 0;
+            background-color: #221E22;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Verdana;
+        }
 
-body {
-  height: 100%;
-  margin: 0;
-  font-family: verdana;
-  background-color: #221E22;
-  color:white;    font-size: 100%;
-}
-
-a {
+        a {
     color: white;
     text-decoration: none;
 }
@@ -155,11 +225,6 @@ a {
 
 .box .row.header {
   flex: 0 1 auto;
-  /* The above is shorthand for:
-  flex-grow: 0,
-  flex-shrink: 1,
-  flex-basis: auto
-  */
 }
 
 .box .row.content {
@@ -173,40 +238,24 @@ a {
   flex: 0 1 40px;
 }
 
-@keyframes hor-movement {
-  from {
-    margin-left: 0%;
-  }
-  to {
-    margin-left: 94%;
-  }
-}
+#container {
+            width: 75vmin;
+            height: 75vmin;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+            border-radius: 15px
+        }
 
-@keyframes ver-movement {
-  from {
-    margin-top: 0%;
-  }
-  to {
-    margin-top: 93%;
-  }
-}
-
-.bouncer {
-  animation-name: hor-movement, ver-movement;
-  animation-duration: 10.259s, 15.013s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-timing-function: linear;
-  font-family: Verdana;
-  font-size: 5vh;
-}
-
-.bouncebox {
-  width: 75vmin;
-  height: 75vmin;
-  background-color: black;
-  border-radius: 15px
-}
+        .bouncing-logo {
+            position: absolute;
+            margin: 0;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            white-space: nowrap;
+            user-select: none;
+        }
 
 </style>
 
