@@ -77,7 +77,10 @@ function goToRandomPage() {
 }
 
 const container = document.getElementById('container');
-const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
+const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff',
+                '#ff88ff', '#88ffff', '#ffff88', '#8888ff', '#88ff88', '#ff8888', '#ff8800',
+                '#ff0088', '#88ff00', '#8800ff', '#00ff88', '#0088ff'
+];
 
 class BouncingLogo {
     constructor(text) {
@@ -86,7 +89,9 @@ class BouncingLogo {
         this.element.innerText = text;
         this.element.style.fontSize = '5vh';
         this.element.onclick = (event) => {
-            window.location.href = `/${text}`};
+        const target = this.element.innerText.trim().toLowerCase();
+        
+        window.location.href = "/" + target;}
         container.appendChild(this.element);
 
         const containerRect = container.getBoundingClientRect();
@@ -121,6 +126,8 @@ class BouncingLogo {
             this.velY *= -1;
             this.posY = Math.max(0, Math.min(this.posY, containerRect.height - logoRect.height));
             this.changeColor();
+            if (Math.random() < 0.5) {
+            this.changeText();}
         }
 
         this.element.style.left = this.posX + 'px';
@@ -131,6 +138,10 @@ class BouncingLogo {
         const newColor = colors[Math.floor(Math.random() * colors.length)];
         this.element.style.color = newColor;
     }
+    changeText() {
+    const newText = pages[Math.floor(Math.random() * pages.length)];
+    this.element.innerText = newText;
+  }
 }
 
 function getRandomSubarray(arr, size) {
